@@ -75,3 +75,11 @@ def get_movie_by_id(movie_id: int):
     # Если не нашли, выбрасываем исключение
     raise HTTPException(status_code=404, detail='Movie not found')
 
+@app.post('/movies/', response_model=Movie, status_code=201)
+def create_movie(movie:Movie):
+    for m in movies_db:
+        if m.title == movie.title and m.year == movie.year:
+            raise HTTPException(status_code=200, detail='уже существует')
+        movies_db.append(movie)
+        return movie
+
