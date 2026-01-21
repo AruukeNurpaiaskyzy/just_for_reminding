@@ -6,4 +6,3 @@ class Movie (BaseModel):
     title: str
     year: int
     description: str
-    
